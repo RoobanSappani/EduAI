@@ -31,9 +31,8 @@ class UI:
     def login_page(self):
 
         self.add_header()
-        st.title("Welcome to MeritoBuddy AI")
 
-        menu = st.sidebar.selectbox("Menu", ["Login", "Sign Up"])
+        menu = st.radio("Select Action", ("Login", "Sign Up"))
 
         if menu == "Sign Up":
 
