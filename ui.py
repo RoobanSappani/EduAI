@@ -10,8 +10,8 @@ class UI:
 
     def __init__(self, user_login_manager):
 
-        st.session_state["user_login_manager"] = user_login_manager
-
+        x = 1
+        
     def add_header(self):
         logo_url = "https://raw.githubusercontent.com/RoobanSappani/TestRagProject/refs/heads/main/logo.png"
         st.markdown(

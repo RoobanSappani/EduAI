@@ -2,6 +2,7 @@ import os
 from dotenv import load_dotenv
 import google.generativeai as genai
 
+import streamlit as st
 from vector_database import *
 from user_login_info import *
 from ui import *
