@@ -1,5 +1,4 @@
 import os
-from langchain.document_loaders import PyPDFLoader
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 from langchain.vectorstores import FAISS
 
@@ -42,15 +41,16 @@ class VectorDatabase:
             )
         
         if(text):
-            return text_splitter.split_documents(text)
+            return text_splitter.split_text(text)
         
         else:
-            return text_splitter.split_documents(" ".join(self.files))
+            return text_splitter.split_text(" ".join(self.files))
 
     def create_vector_database(self, chunks):
 
-        self.vector_db = FAISS.from_documents(chunks, self.embeddings_model)
-        
+        self.vector_db = FAISS.from_texts(chunks, self.embeddings_model)
+        print("Created Vector Database")
+
     def update_vector_database(self, chunks):
         
         ### need to create a logic to update current db.
@@ -63,6 +63,8 @@ class VectorDatabase:
             text = self.read_pdf(file)
             chunks.extend(self.chunk_texts(text))
 
+        print(len(chunks), len(self.chunks))
+        
         if(len(self.chunks)):
             self.update_vector_database(chunks)
         else:

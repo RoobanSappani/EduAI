@@ -1,0 +1,2 @@
+1. after logging and signing up need to click twice to mvoe to chat page. 
+2. processing multiple pdfs not working. update vector database need to implement

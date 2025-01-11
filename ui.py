@@ -32,10 +32,13 @@ class UI:
 
         self.add_header()
 
-        menu = st.radio("Select Action", ("Login", "Sign Up"))
+        menu = st.sidebar.selectbox("Menu", ["Login", "Sign Up"])
+
+        print(menu)
 
         if menu == "Sign Up":
-
+            
+            print("HELLO")
             st.subheader("Create an Account")
             mail_id = st.text_input("Enter your E-Mail")
             username = st.text_input("Enter your Username")
@@ -78,22 +81,25 @@ class UI:
             st.success("PDFs processed and vector store created!")
 
         query = st.text_input("Enter your query:")
-        matches = st.session_state["vb_manager"].query_vector_database(query)
 
-        context = ""
-        
-        for i, (doc, score) in enumerate(matches, start=1):
-            
-            context += f"\n{i}. "
-            context += doc.page_content
-            
-        prompt = f"You are an AI Assistant. Based on the given context, answer the given query. context: {context}, query: {query}"
-        
-        print(prompt)	
+        if(len(query)):
+            print(query)
+            matches = st.session_state["vb_manager"].query_vector_database(query)
 
-        response = st.session_state["llm_model"].generate_content(prompt)
-        st.write("**Response:**")
-        st.write(response.text)
+            context = ""
+            
+            for i, (doc, score) in enumerate(matches, start=1):
+                
+                context += f"\n{i}. "
+                context += doc.page_content
+                
+            prompt = f"You are an AI Assistant. Based on the given context, answer the given query. context: {context}, query: {query}"
+            
+            print(prompt)	
+
+            response = st.session_state["llm_model"].generate_content(prompt)
+            st.write("**Response:**")
+            st.write(response.text)
 
     def run(self):
 
