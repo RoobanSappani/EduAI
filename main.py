@@ -9,12 +9,6 @@ from ui import *
 
 @st.cache_resource()
 def assign_vals():
-
-    print("assigned values")
-
-def main():
-
-    load_dotenv()
     st.session_state["pdfs"] = False
     st.session_state["vb_manager"] = VectorDatabase()
 
@@ -24,7 +18,12 @@ def main():
     st.session_state["llm_model"] = llm_model
     st.session_state["user_login_manager"] = UserLogin()
     st.session_state["ui_manager"] = UI(st.session_state["user_login_manager"])
-    
+    print("assigned values")
+
+def main():
+
+    load_dotenv()
+    assign_vals()
     print("this is a test message")
 
     st.session_state["ui_manager"].run()
