@@ -19,6 +19,7 @@ def assign_vals():
     st.session_state["llm_model"] = llm_model
     st.session_state["user_login_manager"] = UserLogin()
     st.session_state["ui_manager"] = UI(st.session_state["user_login_manager"])
+    print("assigned values")
 
 def main():
 
