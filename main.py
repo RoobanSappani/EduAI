@@ -25,6 +25,8 @@ def init_session():
     if "ui_manager" not in st.session_state:
         st.session_state["ui_manager"] = UI(st.session_state["user_login_manager"])
 
+    st.write("initialized vars")
+
 def main():
 
     load_dotenv()
