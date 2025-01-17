@@ -108,7 +108,7 @@ class HTROCR:
             f.write(pdf_file)
 
         pdf_document = fitz.open("temp.pdf")
-
+        print(pdf_document.page_count)
         images = []
 
         # Loop through each page of the PDF
