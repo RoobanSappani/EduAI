@@ -34,8 +34,7 @@ class HTROCR:
         response = self.supabase_client.storage.from_("EduAICreds").download(
                                                         "gc_vision_creds.json"
                                                     )
-        creds_json = json.loads(response)
-        creds_dict = json.loads(creds_json)
+        creds_dict = json.loads(response)
 
         # Authenticate using the credentials
         creds = vision.Credentials.from_service_account_info(creds_dict)
