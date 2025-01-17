@@ -103,7 +103,8 @@ class HTROCR:
     def extract_pdf_images(self, pdf_file):
         
         if(self.verbose): print("Extracting pages as images...")
- 
+
+        print(pdf_file.getvalue())
         with open("temp.pdf", "wb+") as f:
             print(pdf_file.getvalue())
             pdf_file = open(pdf_file.getvalue(), "rb")
