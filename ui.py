@@ -43,7 +43,7 @@ class UI:
         password = st.text_input("Password", type="password")
 
         # Handle login
-        if st.button("Login", on_click=self.set_page, args=['chat']):
+        if st.button("Login"):
             if st.session_state["user_login_manager"].login_user(username_mail_id, password):
                 st.success("Logged in successfully!")
                 st.session_state["logged_in"] = True
