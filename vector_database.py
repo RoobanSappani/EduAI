@@ -71,7 +71,8 @@ class VectorDatabase:
         chunks = []
         for file in files:
             text = self.read_pdf(file)
-
+            print(text)
+            
             if(len(text) == 0):
                 st.write("No text found in pdf, assuming handwritten notes, will take a few minutes to process...")
                 text = self.htr_ocr_manager.extract_text_from_pdf(file)
