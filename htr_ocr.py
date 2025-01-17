@@ -18,6 +18,7 @@ import google.generativeai as genai
 from prompt_templates import *
 from utils import *
 
+from google.oauth2 import service_account
 import json
 
 class HTROCR:
@@ -37,7 +38,7 @@ class HTROCR:
         creds_dict = json.loads(response)
 
         # Authenticate using the credentials
-        creds = vision.Credentials.from_service_account_info(creds_dict)
+        creds = service_account.Credentials.from_service_account_info(creds_dict)
         self.client = vision.ImageAnnotatorClient(credentials = creds)
 
         if "llm_model" in st.session_state:
