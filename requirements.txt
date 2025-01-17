@@ -1,4 +1,4 @@
-PyPDF2
+pypdf2
 langchain
 faiss-cpu
 openai
@@ -9,6 +9,6 @@ sentence-transformers
 google-generativeai
 bcrypt
 supabase
-PyMuPDF
+pymupdf
 opencv-python-headless
 google-cloud-vision
