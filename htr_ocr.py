@@ -103,10 +103,8 @@ class HTROCR:
     def extract_pdf_images(self, pdf_file):
         
         if(self.verbose): print("Extracting pages as images...")
-
-        if(isinstance(pdf_file, str)):
-            pdf_file = open(pdf_file, "rb")
-
+        
+        pdf_file = open(pdf_file, "rb")
         pdf_document = fitz.open(pdf_file)
 
         images = []
