@@ -106,7 +106,6 @@ class HTROCR:
 
         print(len(pdf_file.getvalue()))
         with open("temp.pdf", "wb+") as f:
-            print(pdf_file.getvalue())
             pdf_file = open(pdf_file.getvalue(), "rb")
             f.write(pdf_file)
         
