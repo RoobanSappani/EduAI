@@ -22,13 +22,7 @@ class HTROCR:
     def __init__(self, verbose = 0):
 
         self.img_context = vision.ImageContext(language_hints=["en"]) 
-
-        creds_json = os.getenv("GOOGLE_APPLICATION_CREDENTIALS_JSON")
-        creds_dict = json.loads(creds_json)
-
-        # Authenticate using the credentials
-        creds = vision.Credentials.from_service_account_info(creds_dict)
-        self.client = vision.ImageAnnotatorClient(credentials = creds)
+        self.client = vision.ImageAnnotatorClient()
 
         if "llm_model" in st.session_state:
             self.llm_model = st.session_state["llm_model"]
