@@ -16,6 +16,7 @@ from google.cloud import vision
 import google.generativeai as genai
 
 from prompt_templates import *
+from utils import *
 
 import json
 
