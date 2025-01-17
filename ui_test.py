@@ -6,19 +6,6 @@ from vector_database import *
 
 import google.generativeai as genai
 
-@st.cache_resource()
-def assign_vals():
-
-    st.session_state["pdfs"] = False
-    st.session_state["vb_manager"] = VectorDatabase()
-
-    genai.configure(api_key=os.getenv("google_gemini_api_key"))
-    llm_model = genai.GenerativeModel("gemini-1.5-flash")
-
-    st.session_state["llm_model"] = llm_model
-    st.session_state["user_login_manager"] = UserLogin()
-    st.session_state["ui_manager"] = UI(st.session_state["user_login_manager"])
-
 class UI:
 
     def __init__(self, user_login_manager):
@@ -180,14 +167,3 @@ class UI:
 #         response = st.session_state["llm_model"].generate_content(prompt)
 #         st.write("**Response:**")
 #         st.write(response.text)
-
-def main():
-
-    load_dotenv()
-    assign_vals()
-    st.session_state["ui_manager"].run()
-    # ui_manager
-
-if __name__ == "__main__":
-    
-    main()

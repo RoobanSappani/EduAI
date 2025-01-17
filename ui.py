@@ -43,7 +43,7 @@ class UI:
         password = st.text_input("Password", type="password")
 
         # Handle login
-        if st.button("Login"):
+        if st.button("Login", on_click=self.set_page, args=['chat']):
             if st.session_state["user_login_manager"].login_user(username_mail_id, password):
                 st.success("Logged in successfully!")
                 st.session_state["logged_in"] = True
@@ -110,7 +110,8 @@ class UI:
                 context += f"\n{i}. "
                 context += doc.page_content
                 
-            prompt = f"You are an AI Assistant. Based on the given context, answer the given query. If you feel context is is not sufficient, use your own knowledge. context: {context}, query: {query}"
+            prompt = llm_context_query_template.format(context = context,
+                                                       query = query)
 
             response = st.session_state["llm_model"].generate_content(prompt)
             st.write("**Response:**")
@@ -135,35 +136,3 @@ class UI:
                 self.signup_page()
         else:
             self.chat_ui()
-
-# def chat_ui():
-    
-#     add_header()
-#     st.sidebar.text(f"Logged in as: {st.session_state['username']}")
-#     st.title("Go ahead, ask me anything (quite ambitious at the moment)")
-
-#     uploaded_files = st.file_uploader("Upload PDF(s)", type="pdf", accept_multiple_files=True)
-     
-#     if st.button("Process PDFs"):
-#         st.session_state["vb_manager"].process_pdfs(uploaded_files)
-#         st.success("PDFs processed and vector store created!")
-#         st.session_state["pdfs"] = True
-        
-#     query = st.text_input("Enter your query:")
-
-#     matches = []
-#     if(query):
-#         matches = st.session_state["vb_manager"].query_vector_database(query)
-
-#         context = ""
-        
-#         for i, (doc, score) in enumerate(matches, start=1):
-            
-#             context += f"\n{i}. "
-#             context += doc.page_content
-            
-#         prompt = f"You are an AI Assistant. Based on the given context, answer the given query. If you feel context is is not sufficient, use your own knowledge. context: {context}, query: {query}"
-
-#         response = st.session_state["llm_model"].generate_content(prompt)
-#         st.write("**Response:**")
-#         st.write(response.text)

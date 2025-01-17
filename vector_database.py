@@ -5,6 +5,7 @@ from langchain.vectorstores import FAISS
 from PyPDF2 import PdfReader
 
 from constants import *
+from htr_ocr import *
 
 class VectorDatabase:
 
@@ -21,10 +22,18 @@ class VectorDatabase:
         self.chunks = []
 
         self.vector_db = None
+
+        self.htr_ocr_manager = HTROCR()
     
     def read_pdf(self, file):
+        
+        if(isinstance(file, str)):
+            pdf_file = open(file, "rb")
+            reader = PdfReader(pdf_file)
+        else:
+            reader = PdfReader(file)
 
-        reader = PdfReader(file)
+        text = ""
         text = "".join(page.extract_text() for page in reader.pages)
 
         self.files.append(text)
@@ -53,17 +62,21 @@ class VectorDatabase:
 
     def update_vector_database(self, chunks):
         
-        ### need to create a logic to update current db.
-        x = 1
+        ### need to create a better logic to update current db.
+        self.vector_db = FAISS.from_texts(self.chunks + chunks, self.embeddings_model)
+
 
     def process_pdfs(self, files, create_vb_db = True):
 
         chunks = []
         for file in files:
             text = self.read_pdf(file)
-            chunks.extend(self.chunk_texts(text))
 
-        print(len(chunks), len(self.chunks))
+            if(len(text) == 0):
+                st.write("No text found in pdf, assuming handwritten notes, will take a few minutes to process...")
+                text = self.htr_ocr_manager.extract_text_from_pdf(file)
+
+            chunks.extend(self.chunk_texts(text))
         
         if(len(self.chunks)):
             self.update_vector_database(chunks)

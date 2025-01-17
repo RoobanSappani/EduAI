@@ -12,10 +12,15 @@ class UserLogin:
 
     def __init__(self):
 
-        self.supabase_url = os.getenv("supabase_url")
-        self.supabase_key = os.getenv("supabase_key")
+        if "supabase_client" not in st.session_state:
 
-        self.supabase_client = create_client(self.supabase_url, self.supabase_key)
+            self.supabase_url = os.getenv("supabase_url")
+            self.supabase_key = os.getenv("supabase_key")
+
+            self.supabase_client = create_client(self.supabase_url, self.supabase_key)
+        
+        else:
+            self.supabase_client = st.session_state["supabase_client"]
 
     def create_user(self, mail_id, username, password):
 
