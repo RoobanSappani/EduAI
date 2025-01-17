@@ -9,4 +9,4 @@ sentence-transformers
 google-generativeai
 bcrypt
 supabase
-fitz
+PyMuPDF
