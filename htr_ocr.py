@@ -105,7 +105,8 @@ class HTROCR:
         if(self.verbose): print("Extracting pages as images...")
  
         with open("temp.pdf", "wb+") as f:
-            f.write(pdf_file.get_value())
+            pdf_file = open(pdf_file, "rb")
+            f.write(pdf_file)
         
         pdf_document = fitz.open("temp.pdf")
         print("PAGE COUNT:", pdf_document.page_count)
