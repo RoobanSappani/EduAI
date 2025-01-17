@@ -17,12 +17,28 @@ import google.generativeai as genai
 
 from prompt_templates import *
 
+import json
+
 class HTROCR:
 
     def __init__(self, verbose = 0):
 
         self.img_context = vision.ImageContext(language_hints=["en"]) 
-        self.client = vision.ImageAnnotatorClient()
+
+        if "supabase_client" not in st.session_state:
+            self.supabase_client = get_supabase_client()
+        else:
+            self.supabase_client = st.session_state["supabase_client"]
+
+        response = self.supabase_client.storage.from_("EduAICreds").download(
+                                                        "gc_vision_creds.json"
+                                                    )
+        creds_json = json.loads(response)
+        creds_dict = json.loads(creds_json)
+
+        # Authenticate using the credentials
+        creds = vision.Credentials.from_service_account_info(creds_dict)
+        self.client = vision.ImageAnnotatorClient(credentials = creds)
 
         if "llm_model" in st.session_state:
             self.llm_model = st.session_state["llm_model"]

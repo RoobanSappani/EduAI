@@ -1,24 +1,18 @@
 import streamlit as st
-from supabase import create_client, Client
 from dotenv import load_dotenv
 
 import bcrypt
 import os
 import ast
 
-load_dotenv
+from utils import *
 
 class UserLogin:
 
     def __init__(self):
 
         if "supabase_client" not in st.session_state:
-
-            self.supabase_url = os.getenv("supabase_url")
-            self.supabase_key = os.getenv("supabase_key")
-
-            self.supabase_client = create_client(self.supabase_url, self.supabase_key)
-        
+            self.supabase_client = get_supabase_client()
         else:
             self.supabase_client = st.session_state["supabase_client"]
 
