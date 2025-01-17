@@ -10,3 +10,4 @@ google-generativeai
 bcrypt
 supabase
 PyMuPDF
+opencv-python
