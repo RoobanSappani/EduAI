@@ -103,12 +103,12 @@ class HTROCR:
     def extract_pdf_images(self, pdf_file):
         
         if(self.verbose): print("Extracting pages as images...")
-
+        print("Extracting pages as images...")
         with open("temp.pdf", "wb+") as f:
             f.write(pdf_file)
-
+        print("saved file")
         pdf_document = fitz.open("temp.pdf")
-        print(pdf_document.page_count)
+        print("PAGE COUNT:", pdf_document.page_count)
         images = []
 
         # Loop through each page of the PDF
