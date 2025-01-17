@@ -105,6 +105,7 @@ class HTROCR:
         if(self.verbose): print("Extracting pages as images...")
  
         with open("temp.pdf", "wb+") as f:
+            print(pdf_file.getvalue())
             pdf_file = open(pdf_file.getvalue(), "rb")
             f.write(pdf_file)
         
