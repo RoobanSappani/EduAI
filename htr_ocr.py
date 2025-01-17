@@ -107,7 +107,7 @@ class HTROCR:
         if(isinstance(pdf_file, str)):
             pdf_file = open(pdf_file, "rb")
 
-        pdf_document = fitz.open(pdf_file)
+        pdf_document = fitz.open("pdf", pdf_file.read())
 
         images = []
 
